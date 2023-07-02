@@ -4,6 +4,7 @@ use App\Http\Controllers\CitaController;
 use App\Http\Controllers\MiCitaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TatuadorController;
+use App\Http\Controllers\UsuarioController;
 use App\Models\Cita;
 use App\Models\Tatuador;
 use Illuminate\Foundation\Application;
@@ -40,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/mis-citas', [MiCitaController::class, 'store'])->name('mi-cita.store');
     Route::put('/mis-citas/update', [MiCitaController::class, 'update'])->name('mi-cita.update');
     Route::delete('/mis-citas/delete', [MiCitaController::class, 'delete'])->name('mi-cita.delete');
+
+    Route::get("/citas/reporte", [CitaController::class, 'reporte'])->name('cita.reporte');
 });
 
 Route::middleware(['auth', 'verified', 'role:ADMIN'])->group(function (){
@@ -51,6 +54,12 @@ Route::middleware(['auth', 'verified', 'role:ADMIN'])->group(function (){
 
 
     Route::get("/citas", [CitaController::class, 'index'])->name('cita.index');
+    Route::put("/citas", [CitaController::class, 'finalizar'])->name('cita.finalizar');
+
+
+    Route::get("/usuarios", [UsuarioController::class, 'index'])->name('usuario.index');
+    Route::put("/usuarios/desactivar", [UsuarioController::class, 'desactivar'])->name('usuario.desactivar');
+    Route::put("/usuarios/activar", [UsuarioController::class, 'activar'])->name('usuario.activar');
 
 });
 

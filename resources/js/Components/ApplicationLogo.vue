@@ -1,3 +1,6 @@
+<script setup>
+const logo = `${APP_NAME}/images/logo.png`
+</script>
 <template>
-    <img src="http://tatoo-app.test/images/logo.png" alt="logo">
+    <img :src="logo" alt="logo">
 </template>

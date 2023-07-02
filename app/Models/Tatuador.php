@@ -10,5 +10,5 @@ class Tatuador extends Model
     use HasFactory;
 
     protected $table = 'tatuadores';
-    protected $fillable = ['nombres', 'dni'];
+    protected $fillable = ['nombres', 'dni', 'estado'];
 }

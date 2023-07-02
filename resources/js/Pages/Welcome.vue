@@ -17,13 +17,17 @@ defineProps({
         required: true,
     },
 });
+
+const url_wp3158498 = `${APP_NAME}/images/wp3158498.jpg`;
+const logo = `${APP_NAME}/images/logo.png`
+console.log(url_wp3158498)
 </script>
 
 <template>
     <Head title="Welcome" />
 <!--http://tatoo-app.test/images/wp3158498.jpg-->
     <div
-        class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://tatoo-app.test/images/wp3158498.jpg'); background-size: cover"
+        class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white" :style="`background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${url_wp3158498}); background-size: cover`"
     >
         <div v-if="canLogin" class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
             <Link
@@ -51,7 +55,7 @@ defineProps({
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
             <div class="flex justify-center">
-                <img src="http://tatoo-app.test/images/logo.png" width="600" alt="">
+                <img :src="logo" width="600" alt="">
             </div>
 
             <div class="mt-16">
@@ -62,7 +66,7 @@ defineProps({
                 <div class="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-left">
                     <div class="flex items-center gap-4">
                         <a
-                            href="https://github.com/sponsors/taylorotwell"
+                            href="#"
                             class="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 text-white"
                         >
                             <svg

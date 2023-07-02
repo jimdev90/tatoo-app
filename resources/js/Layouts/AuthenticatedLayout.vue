@@ -39,6 +39,9 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('cita.index')" :active="route().current('cita.index')" v-if="$page.props.auth.user.role === 'ADMIN' ">
                                     CITAS
                                 </NavLink>
+                                <NavLink :href="route('usuario.index')" :active="route().current('usuario.index')" v-if="$page.props.auth.user.role === 'ADMIN' ">
+                                    USUARIOS
+                                </NavLink>
                             </div>
                         </div>
 

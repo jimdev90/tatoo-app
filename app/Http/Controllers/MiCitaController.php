@@ -75,7 +75,7 @@ class MiCitaController extends Controller
     {
         Cita::where('id', $request->id)
             ->update([
-                'estado' => 'INACTIVO',
+                'estado' => 'ELIMINADO',
             ]);
 
         return Redirect::route('dashboard');

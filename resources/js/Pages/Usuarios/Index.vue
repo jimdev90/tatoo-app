@@ -15,35 +15,13 @@ const $toast = useToast();
 const form = useForm({
     id: '',
 });
-const register = () => {
 
-    form.post(route('mi-cita.store'), {
+const desactivar = (usuario) => {
+    form.id = usuario.id
+    form.put(route('usuario.desactivar'), {
         preserveScroll: true,
         onSuccess: (value) => {
-
-            form.reset()
-        },
-        onError: (errors) => {
-
-            if (errors.create){
-                $toast.error(`${errors.create}`, {
-                    position: 'bottom'
-                })
-            }
-
-            if (form.errors.id) {
-                form.reset('id');
-            }
-        },
-    });
-}
-
-const finalizar = (cita) => {
-    form.id = cita.id
-    form.put(route('cita.finalizar'), {
-        preserveScroll: true,
-        onSuccess: (value) => {
-            $toast.success(`Cita finalizada exitosamente`, {
+            $toast.success(`Usuario desactivado exitosamente`, {
                 position: 'bottom'
             })
             form.reset()
@@ -63,17 +41,28 @@ const finalizar = (cita) => {
     });
 }
 
-const reporte = (cita) => {
-    form.id = cita.id
-    form.get(route('cita.reporte'), {
+const activar = (usuario) => {
+    form.id = usuario.id
+    form.put(route('usuario.activar'), {
         preserveScroll: true,
-        onSuccess: () => {
+        onSuccess: (value) => {
+            $toast.success(`Usuario activado exitosamente`, {
+                position: 'bottom'
+            })
             form.reset()
         },
-        onError: () => {
+        onError: (errors) => {
 
+            if (errors.create){
+                $toast.error(`${errors.create}`, {
+                    position: 'bottom'
+                })
+            }
+
+            if (form.errors.id) {
+                form.reset('id');
+            }
         },
-        onFinish: () => form.reset(),
     });
 }
 
@@ -92,7 +81,7 @@ const reporte = (cita) => {
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="container py-10 px-10 mx-0 min-w-full flex flex-col items-center">
-                            <h2 class="text-5xl mb-3 text-black">Citas</h2>
+                            <h2 class="text-5xl mb-3 text-black">Usuarios</h2>
                         </div>
                     </div>
                     <div class="container py-10 px-10 mx-0 min-w-full">
@@ -107,16 +96,13 @@ const reporte = (cita) => {
                                                 #
                                             </th>
                                             <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                                                Cliente
+                                                Nombres
                                             </th>
                                             <th class="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                                                Fecha
+                                                Email
                                             </th>
                                             <th class="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white">
-                                                Hora
-                                            </th>
-                                            <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
-                                                Tatuador
+                                                Rol
                                             </th>
                                             <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
                                                 Estado
@@ -127,40 +113,41 @@ const reporte = (cita) => {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr v-for="(cita, index) in $page.props.citas">
+                                        <tr v-for="(usuario, index) in $page.props.usuarios">
                                             <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                                                 {{ index++ + 1 }}
                                             </td>
                                             <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                                                <p class="text-sm">{{ cita.user.name }}</p>
+                                                <p class="text-sm">{{ usuario.name }}</p>
                                             </td>
                                             <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                                                <p class="text-sm">{{ cita.fecha }}</p>
+                                                <p class="text-sm">{{ usuario.email }}</p>
+                                            </td>
+                                            <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                                                <p class="text-sm">{{ usuario.role }}</p>
                                             </td>
                                             <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                                                <p class="text-black dark:text-white">{{ cita.hora }}</p>
-                                            </td>
-                                            <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                                                <p class="inline-flex rounded-full bg-success bg-opacity-10 py-1 px-3 text-sm font-medium text-success">
-                                                    {{ cita.tatuador.nombres }}
-                                                </p>
-                                            </td>
-                                            <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                                                <p :class=" `${cita.estado === 'ACTIVO' ? 'text-green-500' : 'text-red-500'}` ">
-                                                    {{ cita.estado }}
+                                                <p :class=" `${usuario.estado === 'ACTIVO' ? 'text-green-500' : 'text-red-500'}` ">
+                                                    {{ usuario.estado }}
                                                 </p>
                                             </td>
                                             <td class="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                                                 <div class="flex items-center space-x-3.5">
-                                                    <button @click="finalizar(cita)" class="hover:text-primary">
-                                                        <svg class="fill-current" width="18" height="18" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M167.764 122.509C193.057 105.756 223.389 96 256 96C344.366 96 416 167.634 416 256C416 288.611 406.244 318.943 389.491 344.236L167.764 122.509ZM122.509 167.764C105.756 193.057 96 223.389 96 256C96 344.366 167.634 416 256 416C288.611 416 318.943 406.244 344.236 389.491L122.509 167.764ZM256 32C132.288 32 32 132.288 32 256C32 379.712 132.288 480 256 480C379.712 480 480 379.712 480 256C480 132.288 379.712 32 256 32Z" fill="black"/>
-                                                        </svg>
+                                                    <button v-if="usuario.estado === 'ACTIVO'" @click="desactivar(usuario)" class="hover:text-primary">
+                                                        <svg class="fill-current" width="18" height="18" viewBox="0 0 60.963 60.842" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path style="fill:#231F20;" d="M59.595,52.861L37.094,30.359L59.473,7.98c1.825-1.826,1.825-4.786,0-6.611
+	c-1.826-1.825-4.785-1.825-6.611,0L30.483,23.748L8.105,1.369c-1.826-1.825-4.785-1.825-6.611,0c-1.826,1.826-1.826,4.786,0,6.611
+	l22.378,22.379L1.369,52.861c-1.826,1.826-1.826,4.785,0,6.611c0.913,0.913,2.109,1.369,3.306,1.369s2.393-0.456,3.306-1.369
+	l22.502-22.502l22.501,22.502c0.913,0.913,2.109,1.369,3.306,1.369s2.393-0.456,3.306-1.369
+	C61.42,57.647,61.42,54.687,59.595,52.861z"/>
+                                                            </svg>
                                                     </button>
-                                                    <button @click="reporte(cita)" class="hover:text-primary">
-                                                        <svg class="fill-current" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M16.8754 11.6719C16.5379 11.6719 16.2285 11.9531 16.2285 12.3187V14.8219C16.2285 15.075 16.0316 15.2719 15.7785 15.2719H2.22227C1.96914 15.2719 1.77227 15.075 1.77227 14.8219V12.3187C1.77227 11.9812 1.49102 11.6719 1.12539 11.6719C0.759766 11.6719 0.478516 11.9531 0.478516 12.3187V14.8219C0.478516 15.7781 1.23789 16.5375 2.19414 16.5375H15.7785C16.7348 16.5375 17.4941 15.7781 17.4941 14.8219V12.3187C17.5223 11.9531 17.2129 11.6719 16.8754 11.6719Z" fill=""></path>
-                                                            <path d="M8.55074 12.3469C8.66324 12.4594 8.83199 12.5156 9.00074 12.5156C9.16949 12.5156 9.31012 12.4594 9.45074 12.3469L13.4726 8.43752C13.7257 8.1844 13.7257 7.79065 13.5007 7.53752C13.2476 7.2844 12.8539 7.2844 12.6007 7.5094L9.64762 10.4063V2.1094C9.64762 1.7719 9.36637 1.46252 9.00074 1.46252C8.66324 1.46252 8.35387 1.74377 8.35387 2.1094V10.4063L5.40074 7.53752C5.14762 7.2844 4.75387 7.31252 4.50074 7.53752C4.24762 7.79065 4.27574 8.1844 4.50074 8.43752L8.55074 12.3469Z" fill=""></path>
+                                                    <button v-else @click="activar(usuario)" class="hover:text-primary" >
+                                                        <svg class="fill-current" width="18" height="18" viewBox="0 0 80.588 61.158" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path style="fill:#231F20;" d="M29.658,61.157c-1.238,0-2.427-0.491-3.305-1.369L1.37,34.808c-1.826-1.825-1.826-4.785,0-6.611
+                                                                c1.825-1.826,4.786-1.827,6.611,0l21.485,21.481L72.426,1.561c1.719-1.924,4.674-2.094,6.601-0.374
+                                                                c1.926,1.72,2.094,4.675,0.374,6.601L33.145,59.595c-0.856,0.959-2.07,1.523-3.355,1.56C29.746,61.156,29.702,61.157,29.658,61.157z
+                                                                "/>
                                                         </svg>
                                                     </button>
                                                 </div>

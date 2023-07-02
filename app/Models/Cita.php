@@ -18,6 +18,7 @@ class Cita extends Model
         'celular',
         'hora',
         'tatuador_id',
+        'estado',
     ];
 
     public function tatuador(): BelongsTo

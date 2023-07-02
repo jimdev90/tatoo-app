@@ -120,7 +120,11 @@ const eliminar = (tatuador) => {
                                         <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">{{ index++ + 1 }}</td>
                                         <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">{{ tatuador.nombres }}</td>
                                         <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">{{ tatuador.dni }}</td>
-                                        <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">{{ tatuador.estado }}</td>
+                                        <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                                            <p :class=" `${tatuador.estado === 'ACTIVO' ? 'text-green-500' : 'text-red-500'}` ">
+                                                {{ tatuador.estado }}
+                                            </p>
+                                        </td>
                                         <td class="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                                             <button  @click="openModalUpdate(tatuador)"
                                                      class="hover:text-primary">

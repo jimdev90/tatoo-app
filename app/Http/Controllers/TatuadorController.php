@@ -13,7 +13,7 @@ class TatuadorController extends Controller
     public function index()
     {
         return Inertia::render('Tatuador/Index', [
-            'tatuadores' => Tatuador::where('estado', 'ACTIVO')->get(),
+            'tatuadores' => Tatuador::get(),
             'status' => session('status'),
         ]);
     }

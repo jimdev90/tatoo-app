@@ -90,7 +90,7 @@ const update = () => {
     form.put(route('mi-cita.update'), {
         preserveScroll: true,
         onSuccess: (value) => {
-            $toast.error(`Cita editada exitosamente`, {
+            $toast.success(`Cita editada exitosamente`, {
                 position: 'bottom'
             })
             form.reset()

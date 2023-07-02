@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('fecha');
             $table->time('hora');
             $table->unsignedBigInteger('tatuador_id');
-            $table->enum('estado', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
+            $table->enum('estado', ['ACTIVO', 'FINALIZADO', 'ELIMINADO'])->default('ACTIVO');
             $table->timestamps();
         });
     }

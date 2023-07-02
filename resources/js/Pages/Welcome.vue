@@ -20,7 +20,7 @@ defineProps({
 
 const url_wp3158498 = `${APP_NAME}/images/wp3158498.jpg`;
 const logo = `${APP_NAME}/images/logo.png`
-console.log(url_wp3158498)
+
 </script>
 
 <template>

@@ -255,13 +255,13 @@ const reporte = (cita) => {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="container py-10 px-10 mx-0 min-w-full">
-                        <h2 class="text-3xl mb-3 text-black">Registrar Cita</h2>
+                        <h2 class="text-3xl mb-3 text-primary">Registrar Cita</h2>
                         <section>
                             <form @submit.prevent="register">
                                 <div class="p-6.5">
                                     <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                                         <div class="w-full xl:w-1/2">
-                                            <label class="mb-2.5 block text-black dark:text-white">
+                                            <label class="mb-2.5 block text-black dark:text-success">
                                                 Nombres
                                             </label>
                                             <input
@@ -274,7 +274,7 @@ const reporte = (cita) => {
                                         </div>
 
                                         <div class="w-full xl:w-1/2">
-                                            <label class="mb-2.5 block text-black dark:text-white">
+                                            <label class="mb-2.5 block text-black dark:text-black">
                                                 Nro DNI
                                             </label>
                                             <input
@@ -287,7 +287,7 @@ const reporte = (cita) => {
                                     </div>
                                     <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                                         <div class="w-full xl:w-1/2">
-                                            <label class="mb-2.5 block text-black dark:text-white">
+                                            <label class="mb-2.5 block text-black dark:text-black">
                                                 Celular
                                             </label>
                                             <input
@@ -300,7 +300,7 @@ const reporte = (cita) => {
                                         </div>
 
                                         <div class="w-full xl:w-1/2">
-                                            <label class="mb-2.5 block text-black dark:text-white">
+                                            <label class="mb-2.5 block text-black dark:text-black">
                                                 Fecha
                                             </label>
                                             <input
@@ -313,20 +313,17 @@ const reporte = (cita) => {
                                     </div>
                                     <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                                         <div class="w-full xl:w-1/2">
-                                            <label class="mb-2.5 block text-black dark:text-white">
+                                            <label class="mb-2.5 block text-black dark:text-black">
                                                 Hora
                                             </label>
-                                            <input
-                                                type="time"
-                                                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                                                v-model="form.hora"
-                                                ref="horaInput"
-                                            >
+                                           
+                                            <!-- step="900" min="08:00" max="17:00"  -->
+                                            <input type="time"  v-model="form.hora" ref="horaInput">
                                             <InputError class="mt-2" :message="form.errors.hora" />
                                         </div>
 
                                         <div class="w-full xl:w-1/2">
-                                            <label class="mb-2.5 block text-black dark:text-white">
+                                            <label class="mb-2.5 block text-black dark:text-black">
                                                 Tatuador
                                             </label>
                                             <div class="relative z-20 bg-transparent dark:bg-form-input">

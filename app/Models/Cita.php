@@ -17,6 +17,7 @@ class Cita extends Model
         'fecha',
         'celular',
         'hora',
+        'horatermina',
         'tatuador_id',
         'estado',
     ];

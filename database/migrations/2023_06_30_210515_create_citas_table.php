@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('celular');
             $table->date('fecha');
             $table->time('hora');
+            $table->time('horatermina')->nullable();
             $table->unsignedBigInteger('tatuador_id');
             $table->enum('estado', ['ACTIVO', 'FINALIZADO', 'ELIMINADO'])->default('ACTIVO');
             $table->timestamps();
